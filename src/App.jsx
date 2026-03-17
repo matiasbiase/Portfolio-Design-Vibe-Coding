@@ -19,6 +19,22 @@ const CHARGE = 2200;
 const CSS = `
 * { box-sizing: border-box; }
 body { margin: 0; }
+.rg-wrap  { max-width: 520px;  width: 100%; margin: 0 auto; padding: 28px 16px; }
+.rg-pass  { max-width: 480px;  width: 100%; }
+.rg-card  { max-width: 420px;  width: 100%; }
+.rg-btn   { max-width: 480px;  width: 100%; }
+@media (min-width: 768px) {
+  .rg-wrap { max-width: 700px; padding: 40px 32px; }
+  .rg-pass { max-width: 600px; }
+  .rg-card { max-width: 500px; }
+  .rg-btn  { max-width: 500px; }
+}
+@media (min-width: 1100px) {
+  .rg-wrap { max-width: 860px; padding: 48px 48px; }
+  .rg-pass { max-width: 700px; }
+  .rg-card { max-width: 560px; }
+  .rg-btn  { max-width: 560px; }
+}
 @keyframes iceCharge {
   0%   { transform:rotate(0deg);   opacity:.25; }
   75%  { transform:rotate(270deg); opacity:.9;  }
@@ -288,7 +304,7 @@ function MissionCard(props){
     setTimeout(function(){props.onReveal();},260);
   }
   return(
-    <div style={{perspective:"900px",width:"100%",maxWidth:300,margin:"0 auto 24px"}}>
+              <div style={{width:"100%",maxWidth:300,margin:"0 auto 24px"}}>
       <div onClick={handleClick} className={"cg"+(flip?" cf":"")}
         style={{"--hc":hc,"--hs":hs,aspectRatio:"2/3",background:"linear-gradient(150deg,#0e1320 0%,#18202e 55%,#0a0e18 100%)",border:"1.5px solid "+hb,borderRadius:14,cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",userSelect:"none",transformStyle:"preserve-3d"}}>
         <div style={{position:"absolute",inset:10,border:"1px solid "+hb.replace("0.5)","0.2)").replace("0.55)","0.2)"),borderRadius:9,pointerEvents:"none"}}/>
@@ -417,7 +433,7 @@ export default function App(){
   if(screen==="setup") return(
     <div style={page}>
       <TopBar lang={lang} setLang={setLang} showMissions={false} missionIds={missionIds} players={players} numPlayers={numPlayers}/>
-      <div style={{maxWidth:480,margin:"0 auto",padding:"24px 16px"}}>
+      <div className="rg-wrap">
 
         <div style={{textAlign:"center",marginBottom:28}}>
           <h1 style={{color:ice,fontSize:"clamp(26px,7vw,36px)",margin:"0 0 2px",letterSpacing:6,fontFamily:FT}}>{t.title}</h1>
@@ -476,7 +492,7 @@ export default function App(){
     <div style={Object.assign({},page,{display:"flex",flexDirection:"column"})}>
       <TopBar lang={lang} setLang={setLang} showMissions={false} missionIds={missionIds} players={players} numPlayers={numPlayers}/>
       <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px 16px"}}>
-        <div style={{width:"100%",maxWidth:380}}>
+        <div className="rg-pass">
           {!revealed ? (
             <div style={{textAlign:"center"}}>
               <p style={{color:"rgba(200,215,225,0.45)",fontSize:"clamp(14px,4vw,17px)",margin:"0 0 8px",fontFamily:FB}}>{t.passTo}</p>
@@ -488,7 +504,7 @@ export default function App(){
           ) : (
             <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
               <p style={{color:"rgba(184,212,226,0.35)",fontSize:"clamp(9px,2.5vw,11px)",letterSpacing:3,margin:"0 0 12px",textAlign:"center",fontFamily:FB}}>{t.secret}</p>
-              <div style={{width:"100%",maxWidth:300,marginBottom:14,background:"rgba(10,14,22,0.97)",border:"1px solid "+hb,borderRadius:14,padding:"20px 18px",boxShadow:"0 0 40px "+hbg,position:"relative",overflow:"hidden"}}>
+              <div className="rg-card" style={{marginBottom:14,background:"rgba(10,14,22,0.97)",border:"1px solid "+hb,borderRadius:14,padding:"20px 18px",boxShadow:"0 0 40px "+hbg,position:"relative",overflow:"hidden"}}>
                 <div style={{position:"absolute",inset:8,border:"1px solid rgba(184,212,226,0.05)",borderRadius:9,pointerEvents:"none"}}/>
                 <div style={{textAlign:"center",marginBottom:14}}>
                   <p style={{color:hc,fontSize:"clamp(10px,3vw,13px)",letterSpacing:2,margin:"0 0 2px",fontFamily:FB,fontWeight:"600"}}>{t.hw+" "+(house?house.name.toUpperCase():"")}</p>
@@ -501,7 +517,7 @@ export default function App(){
                 <Divider/>
                 <p style={{color:"rgba(143,168,184,0.2)",fontSize:"clamp(10px,2.5vw,12px)",margin:0,fontFamily:FB,fontStyle:"italic",textAlign:"left"}}>{t.note2}</p>
               </div>
-              <div style={{width:"100%",maxWidth:340}}>
+              <div className="rg-btn">
                 <IceBtn onClick={handleNext}>{idx+1>=players.length?t.start:t.next}</IceBtn>
               </div>
             </div>
@@ -516,7 +532,7 @@ export default function App(){
     <div style={Object.assign({},page,{display:"flex",flexDirection:"column"})}>
       <TopBar lang={lang} setLang={setLang} showMissions={true} missionIds={missionIds} players={players} numPlayers={numPlayers}/>
       <div style={{flex:1,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px 16px"}}>
-        <div style={{width:"100%",maxWidth:380,textAlign:"center"}}>
+        <div className="rg-pass" style={{textAlign:"center"}}>
           <h2 style={{color:ice,fontSize:"clamp(24px,7vw,32px)",margin:"0 0 4px",letterSpacing:4,fontFamily:FT}}>{t.war1}</h2>
           <h2 style={{color:ice,fontSize:"clamp(24px,7vw,32px)",margin:"0 0 20px",letterSpacing:4,fontFamily:FT}}>{t.war2}</h2>
           <p style={{color:"rgba(184,212,226,0.35)",fontSize:"clamp(12px,3.5vw,14px)",lineHeight:1.7,maxWidth:300,margin:"0 auto 24px",fontFamily:FB}}>{t.warDesc}</p>
